@@ -7,6 +7,6 @@ project(hello-world-cpp)              # Название проекта
 
 add_library(process_launcher STATIC process_launcher.cpp)	# Создание статической библиотеки с именем process_launcher
 
-add_executable(main test.cpp)	  # Создает исполняемый файл с именем main
+add_executable(main main.cpp)	  # Создает исполняемый файл с именем main
 
 target_link_libraries(main process_launcher)  # Линковка программы с библиотекой
