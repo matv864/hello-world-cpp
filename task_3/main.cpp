@@ -22,8 +22,8 @@ struct two_pid {
 #else
     // Для UNIX-подобных систем
     struct two_pid launch_copies() {
-        std::string command1 = "main 1";
-        std::string command2 = "main 2";
+        std::string command1 = "./main 1";
+        std::string command2 = "./main 2";
         struct two_pid result;
         result.pid_1 = ProcessLauncher::launch(command1);
         result.pid_2 = ProcessLauncher::launch(command2);
@@ -32,11 +32,11 @@ struct two_pid {
 #endif
 
 
-uint64_t get_timestamp_ms() {
+long long int get_timestamp_ms() {
     struct timeval tv;
     gettimeofday(&tv, NULL);
 
-    return (((long long)tv.tv_sec)*1000)+(tv.tv_usec/1000);
+    return (((long long int)tv.tv_sec)*1000)+(tv.tv_usec/1000);
 
 }
 
@@ -63,10 +63,10 @@ int main(int argc, char* argv[]) {
 
     struct two_pid pid_of_copy_processes;
 
-    uint64_t last_counter_increment = get_timestamp_ms();
-    uint64_t last_counter_logging = get_timestamp_ms();
-    uint64_t last_copies_launching = get_timestamp_ms();
-    uint64_t current_time;
+    long long int last_counter_increment = get_timestamp_ms();
+    long long int last_counter_logging = get_timestamp_ms();
+    long long int last_copies_launching = get_timestamp_ms();
+    long long int current_time;
 
     while (1) {
         current_time = get_timestamp_ms();

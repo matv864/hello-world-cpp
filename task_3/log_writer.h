@@ -6,11 +6,11 @@
 
 class LogWriter {
 public:
-    static int log_start_line();
-    static int log_counter(long long int counter);
-    static int log_copy_start(std::string copy_name);
-    static int log_copy_finish(std::string copy_name);
-    static int log_copy_error(std::string copy_name);
+    static void log_start_line();
+    static void log_counter(long long int counter);
+    static void log_copy_start(std::string copy_name);
+    static void log_copy_finish(std::string copy_name);
+    static void log_copy_error(std::string copy_name);
 
 protected:
     static std::string get_current_time();

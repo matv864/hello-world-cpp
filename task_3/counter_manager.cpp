@@ -8,7 +8,8 @@ long long int CounterManager::get_counter() {
 
     int fd = open(
         "counter.txt",
-        _O_RDONLY
+        O_RDONLY,
+        0777
     );
     if (fd == -1) {
         return 0; // Ошибка при открытии файла

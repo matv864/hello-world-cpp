@@ -4,7 +4,8 @@ int LogWriter::write_log(const std::string& log_line) {
     std::string new_line = "\n";
     int fd = open(
         "main.log",
-        O_WRONLY|O_APPEND|O_CREAT
+        O_WRONLY|O_APPEND|O_CREAT,
+        0777
     );
     if (fd == -1) {
         return -1; // Ошибка при открытии файла
@@ -30,7 +31,7 @@ std::string LogWriter::get_current_time() {
 }
 
 
-int LogWriter::log_start_line(){
+void LogWriter::log_start_line(){
     std::string log_line = (
         "start programm with pid " +
         std::to_string(getpid()) +
@@ -38,11 +39,10 @@ int LogWriter::log_start_line(){
         get_current_time()
     );
     write_log(log_line);
-    return 0;
 }
 
 
-int LogWriter::log_counter(long long int counter){
+void LogWriter::log_counter(long long int counter){
     std::string log_line = (
         "counter at " +
         get_current_time() +
@@ -52,11 +52,10 @@ int LogWriter::log_counter(long long int counter){
         std::to_string(counter)
     );
     write_log(log_line);
-    return 0;
 }
 
 
-int LogWriter::log_copy_start(std::string copy_name) {
+void LogWriter::log_copy_start(std::string copy_name) {
     std::string log_line = (
         copy_name + 
         " is started at " +
@@ -65,10 +64,9 @@ int LogWriter::log_copy_start(std::string copy_name) {
         std::to_string(getpid())
     );
     write_log(log_line);
-    return 0;
 }
 
-int LogWriter::log_copy_finish(std::string copy_name) {
+void LogWriter::log_copy_finish(std::string copy_name) {
     std::string log_line = (
         copy_name + 
         " is finished at " +
@@ -77,7 +75,7 @@ int LogWriter::log_copy_finish(std::string copy_name) {
     write_log(log_line);
 }
 
-int LogWriter::log_copy_error(std::string copy_name) {
+void LogWriter::log_copy_error(std::string copy_name) {
     std::string log_line = (
         copy_name + 
         " is not finished"
