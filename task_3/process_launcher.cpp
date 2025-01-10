@@ -32,6 +32,16 @@ int ProcessLauncher::waitForProcessWindows(HANDLE processHandle) {
     return -1;
 }
 
+int ProcessLauncher::isProcessActive(int pid) {
+    return isProcessActiveWindows((HANDLE)pid);
+}
+
+int ProcessLauncher::isProcessActiveWindows(HANDLE processHandle) {
+    DWORD ret = WaitForSingleObject(processHandle, 0);
+    bool isRunning = (ret == WAIT_TIMEOUT);
+    return isRunning;
+}
+
 #else
 
 // Для UNIX-подобных систем используем fork и exec
@@ -70,6 +80,15 @@ int ProcessLauncher::waitForProcessUnix(pid_t pid) {
     if (WIFEXITED(status)) {
         return WEXITSTATUS(status); // Возвращаем код завершения процесса
     }
+    return -1;
+}
+
+int ProcessLauncher::isProcessActive(int pid) {
+    return isProcessActiveUnix(pid);
+}
+
+int ProcessLauncher::isProcessActiveUnix(pid_t pid) {
+    // TODO
     return -1;
 }
 

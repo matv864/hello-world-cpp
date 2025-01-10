@@ -1,12 +1,11 @@
-cmake_minimum_required(VERSION 3.13)  # Проверка версии CMake.
-									  # Если версия установленной программы
-									  # старее указаной, произойдёт аварийный выход.
+cmake_minimum_required(VERSION 3.13)
 
-project(hello-world-cpp-logger)              # Название проекта
+project(hello-world-cpp-logger)
 
 
-add_library(log_writer STATIC log_writer.cpp)	# Создание статической библиотеки с именем process_launcher
+add_library(log_writer STATIC log_writer.cpp)
+add_library(process_launcher STATIC process_launcher.cpp)
 
-add_executable(main main.cpp)	  # Создает исполняемый файл с именем main
+add_executable(main main.cpp)
 
-target_link_libraries(main log_writer)  # Линковка программы с библиотекой
+target_link_libraries(main log_writer process_launcher)
