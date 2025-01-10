@@ -1,2 +1,5 @@
 _trash/
 .vscode/
+
+*.exe
+*.log

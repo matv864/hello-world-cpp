@@ -1,6 +1,3 @@
-#ifndef PROCESS_LAUNCHER_H
-#define PROCESS_LAUNCHER_H
-
 #include <string>
 #include <unistd.h>
 #include <fcntl.h>
@@ -16,5 +13,3 @@ public:
 private:
     static int write_log(const std::string& log_line);
 };
-
-#endif // PROCESS_LAUNCHER_H
