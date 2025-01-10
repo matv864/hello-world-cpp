@@ -1,8 +1,9 @@
 #include "process_launcher.h"
 #include "log_writer.h"
 #include "counter_manager.h"
-#include <chrono> // for ms in timestamp
-#include <iostream> // for debugging
+
+#include <sys/time.h>
+
 
 struct two_pid {
     int pid_1, pid_2;
@@ -32,8 +33,11 @@ struct two_pid {
 
 
 uint64_t get_timestamp_ms() {
-    using namespace std::chrono;
-    return duration_cast<milliseconds>(system_clock::now().time_since_epoch()).count();
+    struct timeval tv;
+    gettimeofday(&tv, NULL);
+
+    return (((long long)tv.tv_sec)*1000)+(tv.tv_usec/1000);
+
 }
 
 int main(int argc, char* argv[]) {
@@ -48,7 +52,7 @@ int main(int argc, char* argv[]) {
         if (argv[1][0] == '2') {
             LogWriter::log_copy_start("Copy 2");
             CounterManager::set_counter(CounterManager::get_counter() * 2);
-            // sleep 2s
+            sleep(2);
             CounterManager::set_counter(CounterManager::get_counter() / 2);
             LogWriter::log_copy_finish("Copy 2");
             return 0;

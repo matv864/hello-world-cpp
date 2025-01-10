@@ -20,18 +20,22 @@ int LogWriter::write_log(const std::string& log_line) {
 
 
 std::string LogWriter::get_current_time() {
-    time_t current_time = std::time(nullptr);
-    return ctime(&current_time);
+    time_t rawtime;
+    struct tm * timeinfo;
+    time ( &rawtime );
+    timeinfo = localtime ( &rawtime );
+    std::string res = asctime (timeinfo);
+    res.pop_back();
+    return res;
 }
 
 
 int LogWriter::log_start_line(){
-    std::string current_time = "00:00:00";
     std::string log_line = (
         "start programm with pid " +
         std::to_string(getpid()) +
         " at " +
-        current_time
+        get_current_time()
     );
     write_log(log_line);
     return 0;
@@ -39,10 +43,9 @@ int LogWriter::log_start_line(){
 
 
 int LogWriter::log_counter(long long int counter){
-    std::string current_time = "00:00:00";
     std::string log_line = (
         "counter at " +
-        current_time +
+        get_current_time() +
         " in process with pid " +
         std::to_string(getpid()) +
         " is " +
@@ -54,11 +57,10 @@ int LogWriter::log_counter(long long int counter){
 
 
 int LogWriter::log_copy_start(std::string copy_name) {
-    std::string current_time = "00:00:00";
     std::string log_line = (
         copy_name + 
         " is started at " +
-        current_time +
+        get_current_time() +
         " with pid " +
         std::to_string(getpid())
     );
@@ -67,11 +69,10 @@ int LogWriter::log_copy_start(std::string copy_name) {
 }
 
 int LogWriter::log_copy_finish(std::string copy_name) {
-    std::string current_time = "00:00:00";
     std::string log_line = (
         copy_name + 
         " is finished at " +
-        current_time
+        get_current_time()
     );
     write_log(log_line);
 }

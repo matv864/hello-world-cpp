@@ -1,9 +1,7 @@
 #include <string>
 #include <unistd.h>
 #include <fcntl.h>
-#include <sys/stat.h>
-
-#include <ctime>
+#include <time.h>
 
 
 class LogWriter {
