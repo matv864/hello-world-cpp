@@ -10,3 +10,8 @@ _trash/
 # auto-generating trash from cmake
 build/
 CMakeFiles/
+Makefile
+CMakeCache.txt
+*.cmake
+*.a
+

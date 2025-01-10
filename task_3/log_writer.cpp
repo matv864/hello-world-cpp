@@ -13,6 +13,8 @@ int LogWriter::write_log(const std::string& log_line) {
     write(fd, log_line.c_str(), log_line.length());
     write(fd, new_line.c_str(), new_line.length());
 
+    close(fd);
+
     return 0;
 }
 
@@ -36,7 +38,7 @@ int LogWriter::log_start_line(){
 }
 
 
-int LogWriter::log_counter(int counter){
+int LogWriter::log_counter(long long int counter){
     std::string current_time = "00:00:00";
     std::string log_line = (
         "counter at " +
@@ -51,7 +53,7 @@ int LogWriter::log_counter(int counter){
 }
 
 
-int LogWriter::log_copy_start(int counter, std::string copy_name) {
+int LogWriter::log_copy_start(std::string copy_name) {
     std::string current_time = "00:00:00";
     std::string log_line = (
         copy_name + 

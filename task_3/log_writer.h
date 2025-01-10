@@ -9,8 +9,8 @@
 class LogWriter {
 public:
     static int log_start_line();
-    static int log_counter(int counter);
-    static int log_copy_start(int counter, std::string copy_name);
+    static int log_counter(long long int counter);
+    static int log_copy_start(std::string copy_name);
     static int log_copy_finish(std::string copy_name);
     static int log_copy_error(std::string copy_name);
 
