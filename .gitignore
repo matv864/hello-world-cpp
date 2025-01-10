@@ -1,5 +1,12 @@
 _trash/
+
+# VS Code generate configurations to each device
 .vscode/
 
+# auto-generating files
 *.exe
 *.log
+
+# auto-generating trash from cmake
+build/
+CMakeFiles/
