@@ -16,7 +16,7 @@ int main(int argc, char* argv[]) {
     }
 
     std::cout << "launch main part\n";
-    int res = LogWriter::write_log("heelo");
+    int res = LogWriter::log_start_line(1);
     std::cout << res;
     return 0;
 }

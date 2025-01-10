@@ -18,5 +18,6 @@ int LogWriter::write_log(const std::string& log_line) {
 
 
 int LogWriter::log_start_line(int pid){
-    time_t now = time(NULL);
+    write_log("hello");
+    return 0;
 }
